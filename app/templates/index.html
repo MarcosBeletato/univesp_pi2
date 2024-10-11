@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block content %}
+  <div class="col-8 mb-3 mt-3 m-auto d-flex justify-content-center">
+    <a href="/create" class="btn btn-success">Cadastrar</a>
+  </div>
+
+  <div class="col-8 m-auto">
+    <table class="table table-hover text-center thead-dark">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Pedido</th>
+          <th scope="col">Horário</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rows in values %}
+        <tr>
+          <td scope="col">{{rows.Nome}}</td>
+          <td scope="col">{{rows.Endereço}}</td>
+          <td scope="col">{{rows.Pedido}}</td>
+          <td scope="col">{{rows.Horário}}</td>
+          <td scope="col">
+            <a href="" class="btn btn-danger">Deletar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
