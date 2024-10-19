@@ -10,6 +10,7 @@ sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1UNkoZviCvDlZnoCtyKg
 def home(request):
     wks = sh.worksheet('pedidos')
     data = {}
+
     data['values'] = wks.get_all_records()
     return render(request, 'index.html', data)
 
@@ -27,4 +28,11 @@ def store(request):
             }
     )
 
+    return redirect('/')
+
+def delete(request):
+    if request.method == 'POST':
+        row_number = int(request.POST['row_number']) + 1  # Ajustando índice (contagem começa em 1)
+        wks = sh.worksheet('pedidos')
+        wks.delete_rows(row_number)
     return redirect('/')
