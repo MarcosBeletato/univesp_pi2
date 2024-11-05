@@ -34,5 +34,14 @@ def delete(request):
     if request.method == 'POST':
         row_number = int(request.POST['row_number']) + 1  # Ajustando índice (contagem começa em 1)
         wks = sh.worksheet('pedidos')
+        log = sh.worksheet('log_pedidos')
+
+        # Pega a linha do pedido que será concluido
+        log_info = wks.row_values(row_number)
+        # Salva a informação na sheet log_pedidos
+        log.append_row(log_info)
+        # Apaga o registro da sheet de pedidos
         wks.delete_rows(row_number)
+
+        print(f'Pedido registrado no log: {log_info}')
     return redirect('/')
